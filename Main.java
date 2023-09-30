@@ -58,7 +58,6 @@ public class Main {
 
                 System.out.println("Správne heslo.");
                 kontrolaPrihlasenia = 1;
-                text.spravneHeslo();
             }
 
             else {
@@ -68,11 +67,35 @@ public class Main {
 
             if (kontrolaPrihlasenia == 1) {
 
-                String moznosti = skener.nextLine();
+                while (true) {
 
-                if (moznosti.equals("vklad")) {
+                    text.spravneHeslo();
 
+                    String moznosti = skener.nextLine();
 
+                    if (moznosti.equals("koniec")) {
+
+                        text.vymazKonzolu();
+                        text.koniec();
+                        break;
+                    }
+
+                    if (moznosti.equals("vklad")) {
+                        double zostatok = odpoved.getDouble("zostatok");
+                        Transakcie transakcieVklad = new Transakcie(zostatok);
+
+                        text.vklad();
+                        String vklad = skener.nextLine();
+
+                        transakcieVklad.vklad(Double.parseDouble(vklad));
+                        String zmenaVklad = "UPDATE zakaznik SET zostatok = ? where id = ?";
+                        PreparedStatement preparedStatement2 = spojenie.prepareStatement(zmenaVklad);
+
+                        preparedStatement2.setDouble(1, transakcieVklad.getZostatok());
+                        preparedStatement2.setInt(2, Integer.parseInt(vstupID));
+                        int pocetRiadkov = preparedStatement2.executeUpdate();
+                        System.out.println("Aktuálny zostatok na účte: " + transakcieVklad.getZostatok());
+                    }
                 }
             }
         }

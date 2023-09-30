@@ -33,6 +33,21 @@ public class Texty {
 
     public void spravneHeslo() {
 
-        System.out.println("Moznosti: vklad/vyber/zmenaHesla");
+        System.out.println("Moznosti: info/vklad/vyber/zmenaHesla/koniec");
+    }
+
+    public void vklad() {
+
+        System.out.println("Zadaj hodnotu, ktoru chces vlozit: ");
+    }
+
+    public void zostatok() {
+
+        System.out.println("Tvoj zostatok: ");
+    }
+
+    public void koniec() {
+
+        System.out.println("Ukoncujem proces");
     }
 }
