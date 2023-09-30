@@ -128,6 +128,33 @@ public class Main {
                         int pocetRiadkov = preparedStatement2.executeUpdate();
                         System.out.println("Aktuálny zostatok na účte: " + transakcieVyber.getZostatok());
                     }
+
+                    else if (moznosti.equals("zmenaHesla")) {
+
+                        text.vymazKonzolu();
+                        text.kontrolaHeslo();
+                        String stareHeslo = skener.nextLine();
+
+                        if (vstupHeslo.equals(stareHeslo)) {
+
+                            text.vymazKonzolu();
+                            text.noveHeslo();
+                            String noveHeslo = skener.nextLine();
+
+                            String zmenaHeslo = "UPDATE zakaznik SET heslo = ? where id = ?";
+                            PreparedStatement preparedStatement2 = spojenie.prepareStatement(zmenaHeslo);
+
+                            preparedStatement2.setString(1, noveHeslo);
+                            preparedStatement2.setInt(2, Integer.parseInt(vstupID));
+                            int pocetRiadkov = preparedStatement2.executeUpdate();
+
+                            text.vymazKonzolu();
+                            text.infoZmenaHesla();
+                            text.enter();
+                            String enter = skener.nextLine();
+                        }
+                    }
+
                     else {
 
                         text.vymazKonzolu();

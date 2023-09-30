@@ -17,6 +17,26 @@ public class Texty {
         System.out.println("Zadal si nespravny vyber procesu");
     }
 
+    public void kontrolaHeslo() {
+
+        System.out.println("Zadaj stare heslo: ");
+    }
+
+    public void noveHeslo() {
+
+        System.out.println("Zadaj nove heslo: ");
+    }
+
+    public void infoZmenaHesla() {
+
+        System.out.println("Zmenil si si heslo");
+    }
+
+    public void enter() {
+
+        System.out.println("Stlac enter...");
+    }
+
     public void vymazKonzolu() {
 
         for (int i = 0; i < 100; i++) {
