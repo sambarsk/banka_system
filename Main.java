@@ -1,9 +1,6 @@
 package banka_system;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
@@ -38,6 +35,46 @@ public class Main {
             }
         }
         text.vymazKonzolu();
+        text.prihlasenieID();
 
+        int kontrolaPrihlasenia = 0;
+
+        if (uzivatel == 2) {
+
+            String vstupID = skener.nextLine();
+            text.prihlasenieHeslo();
+            String vstupHeslo = skener.nextLine();
+
+            text.vymazKonzolu();
+
+            String kontrolaPrihlaseniaSQL = "SELECT * FROM zakaznik WHERE id = ? AND heslo = ?";
+            PreparedStatement preparedStatement = spojenie.prepareStatement(kontrolaPrihlaseniaSQL);
+            preparedStatement.setInt(1, Integer.parseInt(vstupID));
+            preparedStatement.setString(2, vstupHeslo);
+
+            ResultSet odpoved = preparedStatement.executeQuery();
+
+            if (odpoved.next()) {
+
+                System.out.println("Správne heslo.");
+                kontrolaPrihlasenia = 1;
+                text.spravneHeslo();
+            }
+
+            else {
+
+                System.out.println("Zlé heslo alebo ID.");
+            }
+
+            if (kontrolaPrihlasenia == 1) {
+
+                String moznosti = skener.nextLine();
+
+                if (moznosti.equals("vklad")) {
+
+
+                }
+            }
+        }
     }
 }

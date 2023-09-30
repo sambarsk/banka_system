@@ -20,8 +20,19 @@ public class Texty {
         }
     }
 
-    public void zadanyZakaznik() {
+    public void prihlasenieID() {
 
         System.out.println("Prihlas sa: ");
+        System.out.println("Zadaj id");
+    }
+
+    public void prihlasenieHeslo() {
+
+        System.out.println("Zadaj heslo");
+    }
+
+    public void spravneHeslo() {
+
+        System.out.println("Moznosti: vklad/vyber/zmenaHesla");
     }
 }
