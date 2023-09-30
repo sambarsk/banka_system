@@ -80,7 +80,20 @@ public class Main {
                         break;
                     }
 
-                    if (moznosti.equals("vklad")) {
+                    else if (moznosti.equals("info")) {
+
+                        text.vymazKonzolu();
+                        int id = odpoved.getInt("id");
+                        String meno = odpoved.getString("meno");
+                        String priezvisko = odpoved.getString("priezvisko");
+                        double zostatok = odpoved.getDouble("zostatok");
+
+                        text.vypisInfo(id, meno, priezvisko, zostatok);
+                    }
+
+                    else if (moznosti.equals("vklad")) {
+
+                        text.vymazKonzolu();
                         double zostatok = odpoved.getDouble("zostatok");
                         Transakcie transakcieVklad = new Transakcie(zostatok);
 
@@ -95,6 +108,30 @@ public class Main {
                         preparedStatement2.setInt(2, Integer.parseInt(vstupID));
                         int pocetRiadkov = preparedStatement2.executeUpdate();
                         System.out.println("Aktuálny zostatok na účte: " + transakcieVklad.getZostatok());
+                    }
+
+                    else if (moznosti.equals("vyber")) {
+
+                        text.vymazKonzolu();
+                        double zostatok = odpoved.getDouble("zostatok");
+                        Transakcie transakcieVyber = new Transakcie(zostatok);
+
+                        text.vyber();
+                        String vyber = skener.nextLine();
+
+                        transakcieVyber.vyber(Double.parseDouble(vyber));
+                        String zmenaVyber = "UPDATE zakaznik SET zostatok = ? where id = ?";
+                        PreparedStatement preparedStatement2 = spojenie.prepareStatement(zmenaVyber);
+
+                        preparedStatement2.setDouble(1, transakcieVyber.getZostatok());
+                        preparedStatement2.setInt(2, Integer.parseInt(vstupID));
+                        int pocetRiadkov = preparedStatement2.executeUpdate();
+                        System.out.println("Aktuálny zostatok na účte: " + transakcieVyber.getZostatok());
+                    }
+                    else {
+
+                        text.vymazKonzolu();
+                        text.chybnyVyberZakaznik();
                     }
                 }
             }
